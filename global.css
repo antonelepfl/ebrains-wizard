@@ -151,10 +151,3 @@ button:focus {
   visibility: hidden;
   opacity: 0;
 }
-
-.app-content {
-	min-height: calc(100vh - 45px); /* leave space for footer */
-}
-.footer-version {
-	text-align: center;
-}
