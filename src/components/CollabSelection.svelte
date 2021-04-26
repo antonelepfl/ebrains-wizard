@@ -4,6 +4,7 @@
   import List, {Item, Text} from '@smui/list';
   import Textfield from '@smui/textfield';
   import {Label} from '@smui/common';
+  import CircularProgress from '@smui/circular-progress';
   import { onDestroy } from 'svelte';
 
   import { userInfo } from '@/store';
@@ -101,7 +102,10 @@
   <div class="collab-list">
     <!-- Select Collab -->
     {#if collabsLoading}
-      <div class="centered">Fetching collabs...</div>
+      <div class="centered">
+        <div>Fetching Collabs...</div>
+        <CircularProgress class="custom-loading-spin" indeterminate />
+      </div>
     {/if}
     
     {#if !collabsLoading && collabs.length}
@@ -124,7 +128,16 @@
             color="secondary"
             variant="unelevated"
           >
-            <Label>{processing ? 'Processing' : 'Use Collab'}</Label>
+            <Label>
+              {#if processing}
+                <div class="centered">
+                  <div>Processing...</div>
+                  <CircularProgress class="custom-loading-spin" indeterminate />
+                </div>
+              {:else}
+                Use Collab
+              {/if}
+            </Label>
           </Button>
         </div>
       </div>
@@ -180,7 +193,10 @@
     margin: 0 auto;
   }
   .centered {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: space-between;
   }
   .collab-list-scroll {
     max-height: 70vh;
