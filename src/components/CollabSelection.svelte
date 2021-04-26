@@ -4,6 +4,7 @@
   import List, {Item, Text} from '@smui/list';
   import Textfield from '@smui/textfield';
   import {Label} from '@smui/common';
+  import { onDestroy } from 'svelte';
 
   import { userInfo } from '@/store';
   import { findMyCollabs } from '@/helpers/drive';
@@ -25,7 +26,7 @@
   let showSnackbar = false;
   let pullerUrl = '';
   
-  userInfo.subscribe((newUser: Oidc.User) => {
+  const unsubscribeUser = userInfo.subscribe((newUser: Oidc.User) => {
     if (!newUser?.access_token) return;
     showMyCollabs();
     lastUsedCollabName = getLastUsedCollab();
@@ -83,6 +84,8 @@
     );
     setFilteredCollabs(filteredCollabsNames);
   }
+
+  onDestroy(unsubscribeUser);
 
 </script>
 

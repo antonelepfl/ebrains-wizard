@@ -2,7 +2,7 @@
 <script lang="ts">
   import Button, {Label, Icon} from '@smui/button';
   import Textfield from '@smui/textfield';
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
 
   import ModelCard from './ModelCard.svelte';
   import ModelShowSelectedToggle from './ModelShowSelectedToggle.svelte';
@@ -23,7 +23,7 @@
     load();
   });
 
-  userInfo.subscribe((newUser: Oidc.User) => {
+  const unsubscribeUser = userInfo.subscribe((newUser: Oidc.User) => {
     if (!newUser?.access_token) return;
     load();
   });
@@ -62,6 +62,8 @@
   function setFilteredModels(models: Array<Model>) {
     filteredModels = models;
   }
+
+	onDestroy(unsubscribeUser);
 </script>
 
 
