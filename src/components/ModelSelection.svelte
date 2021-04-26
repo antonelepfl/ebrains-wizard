@@ -31,6 +31,7 @@
   async function load() {
     modelsLoading = true;
     fetchedModels = await getHippocampusModels();
+    modelsSelected.set([]);
     setFilteredModels(fetchedModels);
     modelsLoading = false;
   }
