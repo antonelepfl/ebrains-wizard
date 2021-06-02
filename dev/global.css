@@ -163,8 +163,8 @@ button:focus {
 
 .use-cases .container .collab-section-container {
 	grid-template:
-		"title" auto
-		"search" auto
-		"list" auto
-		/ 1fr;
+		". title ." auto
+		". search ." auto
+		". list ." auto
+		/ 2fr 8fr 2fr;
 }
